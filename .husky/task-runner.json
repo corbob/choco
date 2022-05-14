@@ -1,0 +1,15 @@
+{
+   "tasks": [
+      {
+         "name": "dotnet-format-example",
+         "command": "dotnet",
+         "args": [ "dotnet-format", "--include", "${staged}" ],
+         "include": [ "**/*.cs", "**/*.vb" ]
+      },
+      {
+	      "name": "commit-msg",
+	      "command": "dotnet",
+	      "args": [ "husky", "exec", ".husky/csx/commit-msg.csx"]
+      }
+   ]
+}
