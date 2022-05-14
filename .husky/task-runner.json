@@ -9,7 +9,7 @@
       {
 	      "name": "commit-msg",
 	      "command": "dotnet",
-	      "args": [ "husky", "exec", ".husky/csx/commit-msg.csx"]
+	      "args": [ "husky", "exec", ".husky/csx/commit-msg.csx", "--args", "${args}"]
       }
    ]
 }
