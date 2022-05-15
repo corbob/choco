@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 private var titlePattern = @"^(?=.{0,50}$)(?:\(.*\)).*$";
 private var commitFile = Args[0];
 private var commitMessage = File.ReadAllLines(commitFile);
-private var title = commitMessage.FirstOrDefault();
+private var title = commitMessage[0];
 private var exitCode = 0;
 private var startLine = 2;
 private var commitStringBuilder = new StringBuilder();
@@ -42,4 +42,5 @@ for (int i = startLine ; i < commitMessage.Length ; i++) {
 }
 
 File.WriteAllText(commitFile, commitStringBuilder.ToString());
+Console.Write(issuesStringBuilder.ToString());
 return exitCode;
