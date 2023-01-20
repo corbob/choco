@@ -26,7 +26,7 @@ Describe "choco upgrade" -Tag Chocolatey, UpgradeCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0
+            $Output.ExitCode | Should -Be 0 -Because $Output.String
         }
 
         It "Output should include pinned package" {
@@ -51,7 +51,7 @@ Describe "choco upgrade" -Tag Chocolatey, UpgradeCommand {
         }
 
         It 'Exits with Success (0)' {
-            $Output.ExitCode | Should -Be 0
+            $Output.ExitCode | Should -Be 0 -Because $Output.String
         }
 
         It 'Outputs running curl script with correct arguments' {
@@ -92,7 +92,7 @@ Describe "choco upgrade" -Tag Chocolatey, UpgradeCommand {
         }
 
         It 'Exits with Success (0)' {
-            $Output.ExitCode | Should -Be 0
+            $Output.ExitCode | Should -Be 0 -Because $Output.String
         }
 
         It 'Outputs running curl script with correct arguments' {
@@ -139,7 +139,7 @@ Describe "choco upgrade" -Tag Chocolatey, UpgradeCommand {
         }
 
         It "Installs successfully and exits with success (0)" {
-            $Output.ExitCode | Should -Be 0
+            $Output.ExitCode | Should -Be 0 -Because $Output.String
         }
 
         It "Installed the packages to the lib directory" {
@@ -209,7 +209,7 @@ Describe "choco upgrade" -Tag Chocolatey, UpgradeCommand {
         }
 
         It 'Installs successfully and exits with success (0)' {
-            $Output.ExitCode | Should -Be 0
+            $Output.ExitCode | Should -Be 0 -Because $Output.String
         }
 
         It 'Shows a warning about the unsupported nuspec metadata element "<_>"' -TestCases $testCases {
