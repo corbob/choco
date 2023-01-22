@@ -36,7 +36,7 @@ exit $command.Count
         }
 
         It 'Exits with Success (0)' {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It 'Reports the correct command name' {
@@ -67,7 +67,7 @@ exit $command.Count
         }
 
         It 'Exits with Failure (1)' {
-            $Output.ExitCode | Should -Be 1 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 1
         }
 
         It 'Reports missing API key' {
@@ -84,7 +84,7 @@ exit $command.Count
         }
 
         It 'Exits with Failure (1)' {
-            $Output.ExitCode | Should -Be 1 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 1
         }
 
         It "Reports that the command doesn't exist" {

@@ -77,8 +77,7 @@ Describe "Ensuring Chocolatey is correctly installed" -Tag Environment, Chocolat
         It "Outputs the version when run with --version" {
             $Output = Invoke-Choco --version
             $script:CurrentVersion = $Output.String
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
-            $LastExitCode | Should -Be 0
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
             ($Output.String -split '-' | Select-Object -First 1) -as [version] | Should -BeTrue
         }
 
@@ -96,7 +95,7 @@ Describe "Ensuring Chocolatey is correctly installed" -Tag Environment, Chocolat
 
             $Output = & $choco
 
-            $LastExitCode | Should -Be 1
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 1
 
             $Output | Should -Contain "Chocolatey v$($script:CurrentVersion)"
             $Output | Should -Contain "Please run 'choco -?' or 'choco <command> -?' for help menu."
@@ -291,7 +290,7 @@ Describe "Ensuring Chocolatey is correctly installed" -Tag Environment, Chocolat
         }
 
         It 'should exit Success (0)' {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It 'should <removal> shim <_> on upgrade' -ForEach $RemovedShims {
@@ -314,7 +313,7 @@ Describe "Ensuring Chocolatey is correctly installed" -Tag Environment, Chocolat
         }
 
         It 'Exits with Success (0)' {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It 'Should remove the invalid configuration file' {
@@ -384,7 +383,7 @@ Describe "Ensuring Chocolatey is correctly installed" -Tag Environment, Chocolat
         }
 
         It "Exits with Failure (1)" {
-            $Output.ExitCode | Should -Be 1 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 1
         }
 
         It "Reports .NET Framework 4.8 is required" {

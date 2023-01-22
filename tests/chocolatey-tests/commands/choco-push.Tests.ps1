@@ -54,7 +54,7 @@ Describe "choco push" -Tag Chocolatey, PushCommand, Broken -Skip:($null -eq $env
         }
 
         It "Exits with Failure (1)" {
-            $Output.ExitCode | Should -Be 1 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 1
         }
 
         It "Should Report the actual cause of the error" {
@@ -85,7 +85,7 @@ Describe "choco push" -Tag Chocolatey, PushCommand, Broken -Skip:($null -eq $env
         }
 
         It "Exits with Failure (1)" {
-            $Output.ExitCode | Should -Be 1 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 1
         }
 
         It "Should Report the actual cause of the error" {
@@ -116,7 +116,7 @@ Describe "choco push" -Tag Chocolatey, PushCommand, Broken -Skip:($null -eq $env
         }
 
         It "Exits with Failure (1)" {
-            $Output.ExitCode | Should -Be 1 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 1
         }
 
         It "Should Report the actual cause of the error" {

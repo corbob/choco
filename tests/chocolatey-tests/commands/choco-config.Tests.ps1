@@ -91,7 +91,7 @@ Describe "choco config" -Tag Chocolatey, ConfigCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Displays chocolatey name with version" {
@@ -169,7 +169,7 @@ Describe "choco config" -Tag Chocolatey, ConfigCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Displays chocolatey name with version" {
@@ -187,7 +187,7 @@ Describe "choco config" -Tag Chocolatey, ConfigCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Displays chocolatey name with version" {
@@ -205,7 +205,7 @@ Describe "choco config" -Tag Chocolatey, ConfigCommand {
         }
 
         It "Exits with failure (1)" {
-            $Output.ExitCode | Should -Be 1 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 1
         }
 
         It "Outputs an error indicating that there's no config by that name" {
@@ -222,7 +222,7 @@ Describe "choco config" -Tag Chocolatey, ConfigCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Displays chocolatey name with version" {
@@ -249,7 +249,7 @@ Describe "choco config" -Tag Chocolatey, ConfigCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Displays chocolatey name with version" {
@@ -276,7 +276,7 @@ Describe "choco config" -Tag Chocolatey, ConfigCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Displays chocolatey name with version" {
@@ -306,7 +306,7 @@ Describe "choco config" -Tag Chocolatey, ConfigCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Displays chocolatey name with version" {
@@ -333,7 +333,7 @@ Describe "choco config" -Tag Chocolatey, ConfigCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Displays chocolatey name with version" {

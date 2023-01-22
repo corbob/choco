@@ -27,7 +27,7 @@ Describe "choco <_>" -ForEach $Command -Tag Chocolatey, ApiKeyCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Only displays chocolatey name with version" {
@@ -42,7 +42,7 @@ Describe "choco <_>" -ForEach $Command -Tag Chocolatey, ApiKeyCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Only displays chocolatey name with version" {
@@ -75,7 +75,7 @@ Describe "choco <_>" -ForEach $Command -Tag Chocolatey, ApiKeyCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Displays chocolatey name with version" {
@@ -122,7 +122,7 @@ Describe "choco <_>" -ForEach $Command -Tag Chocolatey, ApiKeyCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Displays chocolatey name with version" {
@@ -157,7 +157,7 @@ Describe "choco <_>" -ForEach $Command -Tag Chocolatey, ApiKeyCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Displays chocolatey name with version" {
@@ -181,7 +181,7 @@ Describe "choco <_>" -ForEach $Command -Tag Chocolatey, ApiKeyCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Displays chocolatey name with version" {
@@ -199,7 +199,7 @@ Describe "choco <_>" -ForEach $Command -Tag Chocolatey, ApiKeyCommand {
         }
 
         It "Exits with Failure (1)" {
-            $Output.ExitCode | Should -Be 1 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 1
         }
 
         It "Displays chocolatey name with version" {
@@ -219,7 +219,7 @@ Describe "choco <_>" -ForEach $Command -Tag Chocolatey, ApiKeyCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Displays chocolatey name with version" {

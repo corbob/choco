@@ -34,7 +34,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Doesn't install the package to the lib directory" {
@@ -64,7 +64,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Doesn't install the package to the lib directory" {
@@ -90,7 +90,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Installed a package to the lib directory" {
@@ -172,7 +172,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Failure (1), due to the missing 'missingpackage'" {
-            $Output.ExitCode | Should -Be 1 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 1
         }
 
         It "Installs the package '<_>' in the Lib directory" -ForEach @("InstallPackage"; "HasDependency"; "IsDependency"; "UpgradePackage") {
@@ -259,7 +259,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
             # Therefore it cannot find the package to install and fails the install.
             # That doesn't matter because we just need to test that the configuration is set properly.
             It "Should exit Failure (1)" {
-                $Output.ExitCode | Should -Be 1 -Because $Output.String
+                Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 1
             }
 
             It "Should contain the expected configuration option (<Option>) set correctly (<ExpectedValue>)" -ForEach @(
@@ -333,7 +333,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Should still have a package in the lib directory" {
@@ -370,7 +370,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Should install the package in the lib directory" {
@@ -409,7 +409,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Should install the package in the lib directory" {
@@ -458,7 +458,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Has successfully retained an install of the original package" {
@@ -521,7 +521,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Failure (1)" {
-            $Output.ExitCode | Should -Be 1 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 1
         }
 
         It "Has successfully retained an install of the original package" {
@@ -569,7 +569,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Failure (1)" {
-            $Output.ExitCode | Should -Be 1 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 1
         }
 
         It "Doesn't install the package to the lib directory" {
@@ -591,7 +591,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Failure (1)" {
-            $Output.ExitCode | Should -Be 1 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 1
         }
 
         It "Doesn't install the package to the lib directory" {
@@ -641,7 +641,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Installed a package to the lib directory" {
@@ -671,7 +671,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Failure (1)" {
-            $Output.ExitCode | Should -Be 1 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 1
         }
 
         It "Doesn't install the package to the lib directory" {
@@ -697,7 +697,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Installed the package to the lib directory" {
@@ -731,7 +731,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Installed the package to the lib directory" {
@@ -770,7 +770,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Installed the package to the lib directory" {
@@ -820,7 +820,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Installed the package to the lib directory" {
@@ -869,7 +869,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Installed the package to the lib directory" {
@@ -907,7 +907,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Failure (1)" {
-            $Output.ExitCode | Should -Be 1 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 1
         }
 
         It "Doesn't install the package to the lib directory" {
@@ -933,7 +933,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Has installed a package to the lib directory" {
@@ -967,7 +967,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Installed the package to the lib directory" {
@@ -1006,7 +1006,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Failure (1)" {
-            $Output.ExitCode | Should -Be 1 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 1
         }
 
         It "Has not installed the package to the lib directory" {
@@ -1029,7 +1029,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Has installed the package to the lib directory" {
@@ -1058,7 +1058,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Failure (1)" {
-            $Output.ExitCode | Should -Be 1 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 1
         }
 
         It "Has not installed the package to the lib directory" {
@@ -1097,7 +1097,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Has installed the package to the lib directory" {
@@ -1132,7 +1132,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Installed a package to the lib directory" {
@@ -1206,7 +1206,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Outputs a message showing that installation was successful" {
@@ -1236,7 +1236,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Failure (1)" {
-            $Output.ExitCode | Should -Be 1 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 1
         }
 
         It "Outputs a message indicating that there were no sources enabled" {
@@ -1259,7 +1259,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Displays package files install completed" {
@@ -1277,7 +1277,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Displays package files install completed" {
@@ -1304,7 +1304,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         # TODO: Background service only works with Chocolatey Licensed Extension. Assess moving this test to CLE test suite
@@ -1340,7 +1340,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         # TODO: Background service only works with Chocolatey Licensed Extension. Assess moving this test to CLE test suite
@@ -1398,7 +1398,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Outputs string defined in before installation block" {
@@ -1468,7 +1468,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Does not output extracted file path '<_>'" -ForEach @('tools\'; 'tools\chocolateybeforemodify.ps1'; 'tools\chocolateyinstall.ps1'; 'tools\chocolateyuninstall.ps1'; 'zip-log-disable-test.nuspec') {
@@ -1484,7 +1484,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Does not output extracted file path '<_>'" -ForEach @('tools\'; 'tools\chocolateybeforemodify.ps1'; 'tools\chocolateyinstall.ps1'; 'tools\chocolateyuninstall.ps1'; 'zip-log-disable-test.nuspec') {
@@ -1501,7 +1501,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Outputs message <_>" -ForEach @(
@@ -1525,7 +1525,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It "Installs successfully and exits with success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Installed the packages to the lib directory" {
@@ -1602,7 +1602,7 @@ Describe "choco install" -Tag Chocolatey, InstallCommand {
         }
 
         It 'Installs successfully and exits with success (0)' {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It 'Shows a warning about the unsupported nuspec metadata element "<_>"' -TestCases $testCases {

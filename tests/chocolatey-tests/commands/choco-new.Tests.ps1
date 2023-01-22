@@ -35,7 +35,7 @@ Describe "choco new" -Tag Chocolatey, NewCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Displays chocolatey name with version" {
@@ -83,7 +83,7 @@ Describe "choco new" -Tag Chocolatey, NewCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Displays chocolatey name with version" {
@@ -117,7 +117,7 @@ Describe "choco new" -Tag Chocolatey, NewCommand {
             }
 
             It "Exits with Success (0)" {
-                $Output.ExitCode | Should -Be 0 -Because $Output.String
+                Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
             }
 
             It "Displays chocolatey name with version" {
@@ -151,7 +151,7 @@ Describe "choco new" -Tag Chocolatey, NewCommand {
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Creates the empty folders expected (<_>)" -ForEach $EmptyFolders {

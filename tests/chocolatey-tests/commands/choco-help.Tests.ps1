@@ -43,7 +43,7 @@ Describe "choco help sections with command <_>" -ForEach $Command -Tag Chocolate
         }
 
         It "Exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Outputs the Top-Level Help" {
@@ -68,7 +68,7 @@ Describe "choco help sections with command <_>" -ForEach $Command -Tag Chocolate
         }
 
         It "'choco <_> $helpArgument' exits with Success (0)" {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            Assert-ChocolateyOutput -Output $Output -ExpectedExitCode 0
         }
 
         It "Outputs help for <_>" {
