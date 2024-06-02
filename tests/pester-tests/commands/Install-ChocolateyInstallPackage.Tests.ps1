@@ -1,4 +1,4 @@
-﻿Describe 'Testing Install-ChocolateyInstallPackage' {
+﻿Describe 'Testing Install-ChocolateyInstallPackage' -Tags (Get-ChocolateyTestsFilenameTag), ChocolateyInstallPackage {
     BeforeDiscovery {
         # These tests are explicitly testing some scenarios that are not immediately
         # obvious. The test package sets 'SilentArguments' to a flag with a trailing space.
@@ -37,11 +37,11 @@
     }
 
     It 'Exits with Success (0)' {
-        $Output.ExitCode | Should -Be 0 -Because $Output.String
+        $Output | Assert-ChocolateyOutput { $_.ExitCode -eq 0 }
     }
 
     It 'Output is accurate for installer type <Type>' -ForEach $ExpectedOutput {
-        $Output.String | Should -MatchExactly $OutputWithoutAdditionalArguments -Because ($Output.Lines | Select-String "ConsoleApp1.$Type")
-        $Output.String | Should -MatchExactly $OutputWithAdditionalArguments -Because ($Output.Lines | Select-String "ConsoleApp1.$Type")
+        Assert-ChocolateyOutput { $_.String -cmatch $OutputWithoutAdditionalArguments } $Output
+        Assert-ChocolateyOutput { $_.String -cmatch $OutputWithAdditionalArguments } $Output
     }
 }
