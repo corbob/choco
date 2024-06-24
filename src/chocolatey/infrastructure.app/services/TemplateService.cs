@@ -253,7 +253,7 @@ namespace chocolatey.infrastructure.app.services
             {
                 if (!configuration.RegularOutput && configuration.DisplayHeaders)
                 {
-                    this.Log().Info("TemplateName|Version");
+                    OutputHelpers.LimitedOutput("TemplateName","Version");
                 }
 
                 if (templateDirList.Any())
@@ -353,7 +353,7 @@ List of Parameters:
             }
             else
             {
-                this.Log().Info("{0}|{1}".FormatWith(configuration.TemplateCommand.Name, pkgVersion));
+                OutputHelpers.LimitedOutput(configuration.TemplateCommand.Name, pkgVersion);
             }
         }
 

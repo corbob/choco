@@ -264,7 +264,7 @@ Did you know Pro / Business automatically syncs with Programs and
             {
                 if (config.DisplayHeaders)
                 {
-                    this.Log().Info("PackageID|Version");
+                    OutputHelpers.LimitedOutput("PackageID","Version");
                 }
             }
 

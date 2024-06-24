@@ -56,9 +56,6 @@ namespace chocolatey.infrastructure.app.commands
                 .Add("version=",
                      "Version - Used when multiple versions of a package are installed.  Defaults to empty.",
                      option => configuration.Version = option.UnquoteSafe())
-                .Add(StringResources.Options.DISPLAY_HEADERS,
-                    StringResources.OptionDescriptions.DISPLAY_HEADERS,
-                    option => configuration.DisplayHeaders = true)
                 ;
         }
 
@@ -183,7 +180,7 @@ If you find other exit codes that we have not yet documented, please
 
             if (!config.RegularOutput && config.DisplayHeaders)
             {
-                this.Log().Info("PackageId|Version");
+                OutputHelpers.LimitedOutput("PackageId","Version");
             }
 
             foreach (var pkg in packages.OrEmpty())

@@ -50,9 +50,6 @@ namespace chocolatey.infrastructure.app.commands
                 .Add("k=|key=|apikey=|api-key=",
                      "ApiKey - The API key for the source. This is the authentication that identifies you and allows you to push to a source. With some sources this is either a key or it could be a user name and password specified as 'user:password'.",
                      option => configuration.ApiKeyCommand.Key = option.UnquoteSafe())
-                .Add(StringResources.Options.DISPLAY_HEADERS,
-                    StringResources.OptionDescriptions.DISPLAY_HEADERS,
-                    option => configuration.DisplayHeaders = true)
                 ;
         }
 
@@ -202,7 +199,7 @@ If you find other exit codes that we have not yet documented, please
                 default:
                     if (!configuration.RegularOutput && configuration.DisplayHeaders)
                     {
-                        this.Log().Info("Source|Key");
+                        OutputHelpers.LimitedOutput("Source","Key");
                     }
 
                     _configSettingsService.GetApiKey(configuration, (key) =>
@@ -215,7 +212,7 @@ If you find other exit codes that we have not yet documented, please
                         }
                         else
                         {
-                            this.Log().Info(() => "{0}|{1}".FormatWith(key.Source, authenticatedString));
+                            OutputHelpers.LimitedOutput( key.Source, authenticatedString);
                         }
                     });
                     break;

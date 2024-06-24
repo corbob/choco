@@ -64,7 +64,7 @@ namespace chocolatey.infrastructure.app.services
         {
             if (!configuration.RegularOutput && configuration.DisplayHeaders)
             {
-                this.Log().Info("SourceId|Location|Disabled|UserName|Certificate|Priority|BypassProxy|AllowSelfService|AdminOnly");
+                OutputHelpers.LimitedOutput("SourceId","Location","Disabled","UserName","Certificate","Priority","BypassProxy","AllowSelfService","AdminOnly");
             }
 
             var list = new List<ChocolateySource>();
@@ -92,17 +92,17 @@ namespace chocolatey.infrastructure.app.services
                     }
                     else
                     {
-                        this.Log().Info(() => "{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}".FormatWith(
+                        OutputHelpers.LimitedOutput(
                         source.Id.QuoteIfContainsPipe(),
                         source.Value,
                         source.Disabled.ToStringSafe(),
                         source.UserName.QuoteIfContainsPipe(),
                         source.Certificate,
-                        source.Priority,
+                        source.Priority.ToStringSafe(),
                         source.BypassProxy.ToStringSafe(),
                         source.AllowSelfService.ToStringSafe(),
                         source.VisibleToAdminsOnly.ToStringSafe()
-                        ));
+                        );
                     }
                 }
                 list.Add(new ChocolateySource
@@ -275,7 +275,7 @@ namespace chocolatey.infrastructure.app.services
         {
             if (!configuration.RegularOutput && configuration.DisplayHeaders)
             {
-                this.Log().Info("FeatureName|Enabled|Description");
+                OutputHelpers.LimitedOutput("FeatureName","Enabled","Description");
             }
 
             foreach (var feature in ConfigFileSettings.Features.OrEmpty().OrderBy(f => f.Name))
@@ -286,7 +286,7 @@ namespace chocolatey.infrastructure.app.services
                 }
                 else
                 {
-                    this.Log().Info(() => "{0}|{1}|{2}".FormatWith(feature.Name, !feature.Enabled ? "Disabled" : "Enabled", feature.Description));
+                    OutputHelpers.LimitedOutput(feature.Name, !feature.Enabled ? "Disabled" : "Enabled", feature.Description);
                 }
             }
         }
@@ -467,7 +467,7 @@ namespace chocolatey.infrastructure.app.services
         {
             if (!configuration.RegularOutput && configuration.DisplayHeaders)
             {
-                this.Log().Info("Name|Value|Description");
+                OutputHelpers.LimitedOutput("Name","Value","Description");
             }
 
             foreach (var config in ConfigFileSettings.ConfigSettings.OrEmpty().OrderBy(c => c.Key))
@@ -479,7 +479,7 @@ namespace chocolatey.infrastructure.app.services
                 }
                 else
                 {
-                    this.Log().Info(() => "{0}|{1}|{2}".FormatWith(config.Key, config.Value, config.Description));
+                    OutputHelpers.LimitedOutput(config.Key, config.Value, config.Description);
                 }
             }
         }

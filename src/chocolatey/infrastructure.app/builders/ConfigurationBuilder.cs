@@ -411,6 +411,9 @@ namespace chocolatey.infrastructure.app.builders
                         .Add("r|limitoutput|limit-output",
                              "LimitOutput - Limit the output to essential information",
                              option => config.RegularOutput = option == null)
+                        .Add(StringResources.Options.DISPLAY_HEADERS,
+                            StringResources.OptionDescriptions.DISPLAY_HEADERS,
+                            option => config.DisplayHeaders = true)
                         .Add("timeout=|execution-timeout=",
                              "CommandExecutionTimeout (in seconds) - The time to allow a command to finish before timing out. Overrides the default execution timeout in the configuration of {0} seconds. Supply '0' to disable the timeout.".FormatWith(config.CommandExecutionTimeoutSeconds.ToStringSafe()),
                             option =>
