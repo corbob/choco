@@ -184,6 +184,13 @@ namespace chocolatey.infrastructure.app.commands
                     return;
                 }
             }
+            else
+            {
+                if (config.DisplayHeaders)
+                {
+                    this.Log().Info("Severity|Id|Summary|HelpUrl");
+                }
+            }
 
             foreach (var rule in rules)
             {
