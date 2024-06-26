@@ -455,6 +455,12 @@ namespace chocolatey.infrastructure.app.nuget
             {
                 var dependencyInfoResource = resource.DependencyInfoResource;
 
+                if (dependencyInfoResource is null)
+                {
+                    // We can't lookup any dependencies using this resource.
+                    continue;
+                }
+
                 // check if we already have packages matching the constraints in the list
                 IEnumerable<SourcePackageDependencyInfo> dependencyInfos = availablePackages.Where(
                     p => string.Equals(p.Id, packageId, StringComparison.OrdinalIgnoreCase) && p.HasVersion && versionRange.Satisfies(p.Version) && p.Source == resource.Source).ToList();
