@@ -13,6 +13,7 @@ project {
     buildType(Chocolatey)
     buildType(ChocolateySchd)
     buildType(ChocolateyQA)
+    buildType(ChocolateySign)
     buildType(ChocolateyDockerWin)
     buildType(ChocolateyPosix)
 }
@@ -20,6 +21,8 @@ project {
 object Chocolatey : BuildType({
     id = AbsoluteId("Chocolatey")
     name = "Chocolatey CLI (Built with Unit Tests)"
+
+    templates(AbsoluteId("SlackNotificationTemplate"))
 
     artifactRules = """
     """.trimIndent()
@@ -85,12 +88,15 @@ object Chocolatey : BuildType({
 
     requirements {
         doesNotExist("docker.server.version")
+        doesNotContain("teamcity.agent.name", "Docker")
     }
 })
 
 object ChocolateySchd : BuildType({
     id = AbsoluteId("ChocolateySchd")
     name = "Chocolatey CLI (Scheduled Integration Testing)"
+
+    templates(AbsoluteId("SlackNotificationTemplate"))
 
     artifactRules = """
     """.trimIndent()
@@ -125,15 +131,10 @@ object ChocolateySchd : BuildType({
             }
         }
 
-        step {
-            name = "Include Signing Keys"
-            type = "PrepareSigningEnvironment"
-        }
-
         script {
             name = "Call Cake"
             scriptContent = """
-                build.official.bat --verbosity=diagnostic --target=CI --testExecutionType=all --shouldRunOpenCover=false --shouldRunAnalyze=false --shouldRunIlMerge=false --shouldObfuscateOutputAssemblies=false --shouldRunChocolatey=false --shouldRunNuGet=false
+                build.official.bat --verbosity=diagnostic --target=CI --testExecutionType=all --shouldRunOpenCover=false --shouldRunAnalyze=false --shouldRunIlMerge=false --shouldObfuscateOutputAssemblies=false --shouldRunChocolatey=false --shouldRunNuGet=false --shouldAuthenticodeSignMsis=false --shouldAuthenticodeSignOutputAssemblies=false --shouldAuthenticodeSignPowerShellScripts=false
             """.trimIndent()
         }
     }
@@ -154,12 +155,15 @@ object ChocolateySchd : BuildType({
 
     requirements {
         doesNotExist("docker.server.version")
+        doesNotContain("teamcity.agent.name", "Docker")
     }
 })
 
 object ChocolateyQA : BuildType({
     id = AbsoluteId("ChocolateyQA")
     name = "Chocolatey CLI (SonarQube)"
+
+    templates(AbsoluteId("SlackNotificationTemplate"))
 
     artifactRules = """
     """.trimIndent()
@@ -195,15 +199,10 @@ object ChocolateyQA : BuildType({
             }
         }
 
-        step {
-            name = "Include Signing Keys"
-            type = "PrepareSigningEnvironment"
-        }
-
         script {
             name = "Call Cake"
             scriptContent = """
-                build.official.bat --verbosity=diagnostic --target=CI --testExecutionType=none --shouldRunAnalyze=false --shouldRunIlMerge=false --shouldObfuscateOutputAssemblies=false --shouldRunChocolatey=false --shouldRunNuGet=false --shouldRunSonarQube=true --shouldRunDependencyCheck=true
+                build.official.bat --verbosity=diagnostic --target=CI --testExecutionType=none --shouldRunAnalyze=false --shouldRunIlMerge=false --shouldObfuscateOutputAssemblies=false --shouldRunChocolatey=false --shouldRunNuGet=false --shouldRunSonarQube=true --shouldRunDependencyCheck=true --shouldAuthenticodeSignMsis=false --shouldAuthenticodeSignOutputAssemblies=false --shouldAuthenticodeSignPowerShellScripts=false
             """.trimIndent()
         }
     }
@@ -225,12 +224,88 @@ object ChocolateyQA : BuildType({
 
     requirements {
         doesNotExist("docker.server.version")
+        doesNotContain("teamcity.agent.name", "Docker")
+    }
+})
+
+object ChocolateySign : BuildType({
+    id = AbsoluteId("ChocolateySign")
+    name = "Chocolatey CLI (Script Signing)"
+
+    templates(AbsoluteId("SlackNotificationTemplate"))
+
+    artifactRules = """
+    """.trimIndent()
+
+    params {
+        param("env.vcsroot.branch", "%vcsroot.branch%")
+        param("env.Git_Branch", "%teamcity.build.vcs.branch.Chocolatey_ChocolateyVcsRoot%")
+        param("env.FORCE_OFFICIAL_AUTHENTICODE_SIGNATURE", "true")
+        param("teamcity.git.fetchAllHeads", "true")
+        password("env.GITHUB_PAT", "%system.GitHubPAT%", display = ParameterDisplay.HIDDEN, readOnly = true)
+    }
+
+    vcs {
+        root(DslContext.settingsRoot)
+
+        branchFilter = """
+            +:*
+        """.trimIndent()
+    }
+
+    steps {
+        powerShell {
+            name = "Prerequisites"
+            scriptMode = script {
+                content = """
+                    if ((Get-WindowsFeature -Name NET-Framework-Features).InstallState -ne 'Installed') {
+                        Install-WindowsFeature -Name NET-Framework-Features
+                    }
+
+                    choco install windows-sdk-7.1 netfx-4.0.3-devpack dotnet-6.0-runtime --confirm --no-progress
+                    exit ${'$'}LastExitCode
+                """.trimIndent()
+            }
+        }
+
+        step {
+            name = "Include Signing Keys"
+            type = "PrepareSigningEnvironment"
+        }
+
+        script {
+            name = "Call Cake"
+            scriptContent = """
+                build.official.bat --verbosity=diagnostic --target=Sign-PowerShellScripts --exclusive
+            """.trimIndent()
+        }
+    }
+
+    triggers {
+        vcs {
+            triggerRules = """
+                +:nuspec/**/*.ps1
+                +:nuspec/**/*.psm1
+                +:nuspec/**/*.psd1
+                +:src/chocolatey.resources/**/*.ps1
+                +:src/chocolatey.resources/**/*.psm1
+                +:src/chocolatey.resources/**/*.psd1
+            """.trimIndent()
+            branchFilter = "+:develop"
+        }
+    }
+
+    requirements {
+        doesNotExist("docker.server.version")
+        doesNotContain("teamcity.agent.name", "Docker")
     }
 })
 
 object ChocolateyDockerWin : BuildType({
     id = AbsoluteId("ChocolateyDockerWin")
     name = "Docker (Windows)"
+
+    templates(AbsoluteId("SlackNotificationTemplate"))
 
     params {
         // TeamCity has suggested "${Chocolatey.depParamRefs.buildNumber}"
@@ -279,12 +354,15 @@ object ChocolateyDockerWin : BuildType({
     requirements {
         contains("docker.server.osType", "windows")
         exists("docker.server.version")
+        contains("teamcity.agent.name", "Docker")
     }
 })
 
 object ChocolateyPosix : BuildType({
     id = AbsoluteId("ChocolateyPosix")
     name = "Docker (Linux)"
+
+    templates(AbsoluteId("SlackNotificationTemplate"))
 
     params {
         param("env.CAKE_NUGET_SOURCE", "") // The Cake version we use has issues with authing to our private source on Linux
@@ -391,5 +469,6 @@ object ChocolateyPosix : BuildType({
     requirements {
         contains("docker.server.osType", "linux")
         exists("docker.server.version")
+        contains("teamcity.agent.name", "Docker")
     }
 })
