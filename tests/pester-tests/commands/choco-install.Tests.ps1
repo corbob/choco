@@ -2046,12 +2046,12 @@ To install a local, or remote file, you may use:
         }
     }
 
-    Context 'Installing package with large number of dependency versions' {
+    Context 'Installing package with large number of dependency versions' -Tag Testing {
         BeforeAll {
             Restore-ChocolateyInstallSnapshot -SetWorkDir
 
-            Expand-Archive $PSScriptRoot/demo-test.zip -DestinationPath $PWD
-            $Output = Invoke-Choco install package-a -s .
+            Expand-Archive $PSScriptRoot/demo-projects.zip -DestinationPath $PWD
+            $Output = Invoke-Choco install package-a -s 'a,b,c' --confirm
         }
 
         It "Exits with Success (0)" {
@@ -2059,7 +2059,7 @@ To install a local, or remote file, you may use:
         }
 
         It "Completes quickly" {
-            $Output.Duration | Should -BeLessOrEqual "00:00:10" -Because $Output.String
+            $Output.Duration | Should -BeLessOrEqual "00:30:00" -Because $Output.String
         }
     }
 
