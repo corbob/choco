@@ -2046,6 +2046,23 @@ To install a local, or remote file, you may use:
         }
     }
 
+    Context 'Installing package with large number of dependency versions' {
+        BeforeAll {
+            Restore-ChocolateyInstallSnapshot -SetWorkDir
+
+            Expand-Archive $PSScriptRoot/demo-test.zip -DestinationPath $PWD
+            $Output = Invoke-Choco install package-a -s .
+        }
+
+        It "Exits with Success (0)" {
+            $Output.ExitCode | Should -Be 0 -Because $Output.String
+        }
+
+        It "Completes quickly" {
+            $Output.Duration | Should -BeLessOrEqual "00:00:10" -Because $Output.String
+        }
+    }
+
     # This needs to be the last test in this block, to ensure NuGet configurations aren't being created.
     # Any tests after this block are expected to generate the configuration as they're explicitly using the NuGet CLI
     Test-NuGetPaths
