@@ -695,6 +695,46 @@ To upgrade a local, or remote file, you may use:
         }
     }
 
+    Context 'Upgrading a dependency with pinned parent and depends on a range less than upgrade version' {
+        BeforeAll {
+            $DependentPackageName = 'isdependency'
+            Restore-ChocolateyInstallSnapshot
+            $Setup = {
+                Invoke-Choco install $DependentPackageName hasdependency --version 1.0.0 --confirm
+                Invoke-Choco pin add -n hasdependency
+            }
+            $Output = Invoke-Choco install upgrade $DependentPackageName --confirm
+            $Packages = (Invoke-Choco list -r).Lines | ConvertFrom-ChocolateyOutput -Command List
+        }
+
+        It "Exits with Success (0)" {
+            $Output.ExitCode | Should -Be 0 -Because $Output.String
+        }
+
+        It "Should report upgraded successfully" {
+            $Output.Lines | Should -Contain "upgraded 1/1" -Because $Output.String
+        }
+
+        It "Should report package conflicts" {
+            $messages = @(
+                "One or more unresolved package dependency constraints detected in the Chocolatey lib folder"
+                "hasdependency 1.0.0 constraint: isdependency (>= 1.0.0 && < 2.0.0)"
+            )
+
+            foreach($msg in $messages) {
+                $Output.Lines | Should -Contain $msg -Because $Output.String
+            }
+        }
+
+        It "Should upgrade the dependent package to the highest version in the range" {
+            ($Packages | Where-Object Name -eq $DependentPackageName).Version | Should -Be '1.1.0' -Because $Output.String
+        }
+
+        It "Should not upgrade the exact version dependency package" {
+            ($Packages | Where-Object Name -eq 'isexactversiondependency').Version | Should -Be '1.0.0' -Because $Output.String
+        }
+    }
+
     # This needs to be (almost) the last test in this block, to ensure NuGet configurations aren't being created.
     # Any tests after this block are expected to generate the configuration as they're explicitly using the NuGet CLI
     Test-NuGetPaths
