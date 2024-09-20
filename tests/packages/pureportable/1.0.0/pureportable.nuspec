@@ -9,6 +9,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>This package is intentionally minimal. It is designed to test purely portable packages which do not contain any installation or uninstallation scripts.</description>
     <summary>This package is intentionally minimal. It is designed to test purely portable packages which do not contain any installation or uninstallation scripts.</summary>
+    <projectUrl>https://chocolatey.org</projectUrl>
     <tags>pureportable admin</tags>
   </metadata>
   <files>

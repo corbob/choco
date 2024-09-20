@@ -10,6 +10,7 @@
     <description>Package is a dependency for other testing packages. The upstream packages expect exact versions of this package.</description>
     <summary>Package is a dependency for other testing packages. The upstream packages expect exact versions of this package.</summary>
     <releaseNotes />
+    <projectUrl>https://chocolatey.org</projectUrl>
     <tags>isexactversiondependency admin</tags>
   </metadata>
   <files>

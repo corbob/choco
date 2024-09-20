@@ -17,7 +17,7 @@ Each version is available as `upgradedowngradesdependency` and `downgradesdepend
         </description>
         <summary>Package to test for out of range dependencies. This 1st version have a valid exact range.</summary>
         <releaseNotes />
-        <copyright />
+        <projectUrl>https://chocolatey.org</projectUrl>
         <tags>upgradedowngradesdependency admin</tags>
         <dependencies>
             <dependency id="isdependency" version="[1.0.0,)" />

@@ -14,7 +14,7 @@
         </description>
         <summary>Package that contains dependencies that have dependencies that may fail to install.</summary>
         <releaseNotes />
-        <copyright />
+        <projectUrl>https://chocolatey.org</projectUrl>
         <tags>hasfailingnesteddependency admin</tags>
         <dependencies>
             <dependency id="dependencyfailure" version="1.0.0" />

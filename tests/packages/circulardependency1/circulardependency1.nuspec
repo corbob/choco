@@ -5,10 +5,11 @@
     <version>0.0.1</version>
     <title>circulardependency1 (Install)</title>
     <authors>Chocolatey Software</authors>
-    <tags>circulardependency1 SPACE_SEPARATED</tags>
+    <tags>circulardependency1</tags>
     <summary>Test of circular dependencies</summary>
     <description>Circular dependencies are not supported by Chocolatey. `choco install` should fail when it encounters them.
     </description>
+    <projectUrl>https://chocolatey.org</projectUrl>
     <dependencies>
       <dependency id="circulardependency2" version="0.0.1" />
     </dependencies>

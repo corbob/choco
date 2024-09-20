@@ -6,6 +6,8 @@
     <authors>Chocolatey Software</authors>
     <owners>chocolatey</owners>
     <description>Package that has a loose version dependency.</description>
+    <projectUrl>https://chocolatey.org</projectUrl>
+    <tags>childdependencywithlooserversiondependency</tags>
     <dependencies>
       <dependency id="isexactversiondependency" version="[1.0.0, 3)" />
     </dependencies>

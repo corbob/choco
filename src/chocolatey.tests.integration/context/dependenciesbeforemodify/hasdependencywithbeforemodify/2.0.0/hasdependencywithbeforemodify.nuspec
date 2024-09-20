@@ -10,7 +10,7 @@
         <description>Package takes a dependency with a chocolateyBeforeModify script.</description>
         <summary>Package takes a dependency with a chocolateyBeforeModify script.</summary>
         <releaseNotes />
-        <copyright />
+        <projectUrl>https://chocolatey.org</projectUrl>
         <tags>hasdependencywithbeforemodify admin</tags>
         <dependencies>
             <dependency id="isdependencywithbeforemodify" version="[2.0.0, 3.0.0.0)" />

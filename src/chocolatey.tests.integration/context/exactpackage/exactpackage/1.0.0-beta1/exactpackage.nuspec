@@ -10,6 +10,7 @@
     <description>Package used for tests that testing exact packages by either id or version.</description>
     <summary>Package used for tests that testing exact packages by either id or version.</summary>
     <releaseNotes />
+    <projectUrl>https://chocolatey.org</projectUrl>
     <tags>exactpackage admin</tags>
   </metadata>
   <files>

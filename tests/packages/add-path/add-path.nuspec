@@ -6,8 +6,8 @@
     <version>1.0.0</version>
     <title>add-path (Install)</title>
     <authors>Chocolatey Software</authors>
-    <projectUrl>https://_Software_Location_REMOVE_OR_FILL_OUT_</projectUrl>
-    <tags>add-path SPACE_SEPARATED</tags>
+    <projectUrl>https://chocolatey.org</projectUrl>
+    <tags>add-path</tags>
     <summary>Package used for testing the add-path function.</summary>
     <description>Package used for testing the add-path function.</description>
   </metadata>

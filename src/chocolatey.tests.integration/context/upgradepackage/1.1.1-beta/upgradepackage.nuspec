@@ -10,6 +10,7 @@
     <description>Package used for upgrade testing.</description>
     <summary>Package used for upgrade testing.</summary>
     <releaseNotes />
+    <projectUrl>https://chocolatey.org</projectUrl>
     <tags>upgradepackage admin</tags>
   </metadata>
   <files>

@@ -8,6 +8,8 @@
     <title>Install-ChocolateyInstallPackage tests</title>
     <summary>Package for the testing of Install-ChocolateyInstallPackage</summary>
     <description>Package for the testing of Install-ChocolateyInstallPackage. Used by Pester to ensure extra spaces are not added to command lines.</description>
+    <projectUrl>https://chocolatey.org</projectUrl>
+    <tags>install-chocolateyinstallpackage-tests</tags>
   </metadata>
   <files>
     <file src="chocolateyInstall.ps1" target="tools/chocolateyInstall.ps1" />

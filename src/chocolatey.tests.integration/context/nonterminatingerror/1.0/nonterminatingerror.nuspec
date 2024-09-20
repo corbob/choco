@@ -6,6 +6,8 @@
     <authors>Rob Reynolds</authors>
     <owners>Rob Reynolds</owners>
     <description>nonterminating - This package errors during install with a non-terminating error</description>
+    <projectUrl>https://chocolatey.org</projectUrl>
+    <tags>nonterminatingerror</tags>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />

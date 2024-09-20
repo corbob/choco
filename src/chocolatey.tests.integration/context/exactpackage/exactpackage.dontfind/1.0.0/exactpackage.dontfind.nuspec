@@ -10,6 +10,7 @@
     <description>Package used for tests that testing exact packages by either id or version. This package is expected to *not* be found.</description>
     <summary>Package used for tests that testing exact packages by either id or version. This package is expected to *not* be found.</summary>
     <releaseNotes />
+    <projectUrl>https://chocolatey.org</projectUrl>
     <tags>exactpackage.dontfind admin</tags>
   </metadata>
   <files>

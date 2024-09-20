@@ -6,8 +6,8 @@
     <version>1.0.0</version>
     <title>package.template (Install)</title>
     <authors>Chocolatey Software</authors>
-    <projectUrl>https://_Software_Location_REMOVE_OR_FILL_OUT_</projectUrl>
-    <tags>package.template SPACE_SEPARATED</tags>
+    <projectUrl>https://chocolatey.org</projectUrl>
+    <tags>package.template</tags>
     <summary>Package used for testing template packages.</summary>
     <description>Package used for testing template packages.MarkDown_Okay </description>
   </metadata>

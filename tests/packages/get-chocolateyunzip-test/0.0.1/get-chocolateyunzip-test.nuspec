@@ -9,6 +9,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Package to test Get-ChocolateyUnzip</description>
     <summary>Package to test Get-ChocolateyUnzip</summary>
+    <projectUrl>https://chocolatey.org</projectUrl>
     <tags>get-chocolateyunzip issue test</tags>
   </metadata>
 </package>

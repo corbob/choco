@@ -8,6 +8,7 @@
     <title>7-Zip (Install)</title>
     <authors>Igor Pavlov</authors>
     <copyright>Copyright (c) 1999-2018 Igor Pavlov</copyright>
+    <projectUrl>https://chocolatey.org</projectUrl>
     <tags>7-zip admin</tags>
     <description>This package can be used to validate only business licenses can install this package.</description>
   </metadata>

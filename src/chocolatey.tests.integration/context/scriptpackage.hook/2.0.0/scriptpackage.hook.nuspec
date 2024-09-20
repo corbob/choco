@@ -9,6 +9,7 @@
     <tags>scriptpackage.hook</tags>
     <summary>Package with various hook scripts</summary>
     <description>Package with various hook scripts. Intended to test </description>
+    <projectUrl>https://chocolatey.org</projectUrl>
   </metadata>
   <files>
     <file src="hook\**" target="hook" />

@@ -9,6 +9,7 @@
     <authors>Chocolatey Software</authors>
     <!-- copyright is usually years and software vendor, but not required for internal feeds -->
     <copyright>Chocolatey Software</copyright>
+    <projectUrl>https://chocolatey.org</projectUrl>
     <tags>get-chocolateyunzip-licensed</tags>
     <description>
       This package contains a commercial edition of the cmdlet `Get-ChocolateyUnzip`, and can be used to verify that installation with that cmdlet works as intended.

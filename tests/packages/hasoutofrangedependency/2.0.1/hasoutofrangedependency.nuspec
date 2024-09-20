@@ -10,7 +10,7 @@
         <description>Package used for testing out of range dependencies.</description>
         <summary>Package to test for out of range dependencies. This version uses a dependency that require a version between available</summary>
         <releaseNotes />
-        <copyright />
+        <projectUrl>https://chocolatey.org</projectUrl>
         <tags>hasoutofrangedependency admin</tags>
         <dependencies>
             <dependency id="hasdependency" version="[1.1.1, 1.4.0]" />

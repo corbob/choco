@@ -10,7 +10,7 @@
         <description>Package used for testing nested dependencies.</description>
         <summary>Package used for testing nested dependencies.</summary>
         <releaseNotes />
-        <copyright />
+        <projectUrl>https://chocolatey.org</projectUrl>
         <tags>hasnesteddependency admin</tags>
         <dependencies>
             <dependency id="hasdependency" version="1.0.0" />

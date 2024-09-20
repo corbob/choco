@@ -9,6 +9,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Package used for install tests. Installs various files and outputs various things to assert against.</description>
     <summary>Package used for install tests. Installs various files and outputs various things to assert against.</summary>
+    <projectUrl>https://chocolatey.org</projectUrl>
     <tags>installpackage admin</tags>
   </metadata>
   <files>

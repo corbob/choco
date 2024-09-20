@@ -9,6 +9,7 @@
     <authors>Chocolatey</authors>
     <copyright>Chocolatey</copyright>
     <tags>getconfig</tags>
+    <projectUrl>https://chocolatey.org</projectUrl>
     <description>Test package for using Get-ChocolateyConfigValue.</description>
   </metadata>
   <files>

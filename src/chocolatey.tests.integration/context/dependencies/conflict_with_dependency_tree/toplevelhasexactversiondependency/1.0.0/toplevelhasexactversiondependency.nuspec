@@ -6,6 +6,8 @@
     <authors>Chocolatey Software</authors>
     <owners>chocolatey</owners>
     <description>Package with exact version dependency.</description>
+    <projectUrl>https://chocolatey.org</projectUrl>
+    <tags>toplevelhasexactversiondependency</tags>
     <dependencies>
       <dependency id="childdependencywithlooserversiondependency" version="[1.0.0]" />
       <dependency id="isexactversiondependency" version="[1.0.0]" />

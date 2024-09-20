@@ -9,6 +9,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Package to test Get-ChocolateyUnzip. Specifically designed for testing custom paths like those identified in https://github.com/chocolatey/chocolatey-licensed-issues/issues/284</description>
     <summary>Package to test Get-ChocolateyUnzip</summary>
+    <projectUrl>https://chocolatey.org</projectUrl>
     <tags>get-chocolateyunzip issue test</tags>
   </metadata>
   <files>

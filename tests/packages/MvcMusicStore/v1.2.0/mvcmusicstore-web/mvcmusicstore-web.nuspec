@@ -8,10 +8,11 @@
     <!-- == SOFTWARE SPECIFIC SECTION == -->
     <title>Mvc Music Store Web</title>
     <authors>Nobody</authors>
-    <tags>mvcmusicstore-web SPACE_SEPARATED</tags>
+    <tags>mvcmusicstore-web</tags>
     <summary>Mvc Music Store Website</summary>
     <description>This is the code that releases the website</description>
     <releaseNotes>v1.2.0 - Minor upgrade</releaseNotes>
+    <projectUrl>https://chocolatey.org</projectUrl>
   </metadata>
   <files>
     <!-- this section controls what actually gets packaged into the Chocolatey package -->

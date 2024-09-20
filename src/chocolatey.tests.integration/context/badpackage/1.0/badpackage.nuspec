@@ -9,6 +9,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>badpackage - This package errors during install. That is its only purpose</description>
     <summary>badpackage - This package errors during install</summary>
+    <projectUrl>https://chocolatey.org</projectUrl>
     <tags>badpackage</tags>
   </metadata>
   <files>

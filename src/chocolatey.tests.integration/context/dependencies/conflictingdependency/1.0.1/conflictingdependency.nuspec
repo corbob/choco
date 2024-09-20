@@ -10,7 +10,8 @@
     <description>Package with dependency tree that will conflict with other dependencies.</description>
     <summary>Package with dependency tree that will conflict with other dependencies.</summary>
     <releaseNotes />
-    <copyright />
+    <copyright>Chocolatey Software</copyright>
+    <projectUrl>https://chocolatey.org</projectUrl>
     <tags>conflictingdependency admin</tags>
     <dependencies>
       <dependency id="isdependency" version="1.0.1" />

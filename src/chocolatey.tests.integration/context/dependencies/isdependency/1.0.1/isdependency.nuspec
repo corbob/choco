@@ -10,6 +10,7 @@
     <description>Package is a dependency for other testing packages.</description>
     <summary>Package is a dependency for other testing packages.</summary>
     <releaseNotes />
+    <projectUrl>https://chocolatey.org</projectUrl>
     <tags>isdependency admin</tags>
   </metadata>
   <files>

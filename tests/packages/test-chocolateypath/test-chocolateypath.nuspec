@@ -5,9 +5,9 @@
     <id>test-chocolateypath</id>
     <version>0.1.0</version>
     <title>test-packagepath (Install)</title>
-    <authors>__REPLACE_AUTHORS_OF_SOFTWARE_COMMA_SEPARATED__</authors>
-    <projectUrl>https://_Software_Location_REMOVE_OR_FILL_OUT_</projectUrl>
-    <tags>test-packagepath SPACE_SEPARATED</tags>
+    <authors>Chocolatey Software</authors>
+    <projectUrl>https://chocolatey.org</projectUrl>
+    <tags>test-packagepath</tags>
     <summary>Package to test the Get-ChocolateyPath Chocolatey PowerShell function.</summary>
     <description>Package to test the Get-ChocolateyPath Chocolatey PowerShell function.</description>
   </metadata>

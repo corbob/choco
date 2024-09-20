@@ -7,10 +7,9 @@
     <authors>Chocolatey Software</authors>
     <owners>chocolatey</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Package with dependencies.</description>
-    <summary>Package with dependencies.</summary>
+    <description>Package with dependencies. Used for testing installation and dependency resolution.</description>
     <releaseNotes />
-    <copyright />
+    <projectUrl>https://chocolatey.org</projectUrl>
     <tags>hasdependency admin</tags>
     <dependencies>
       <dependency id="isdependency" version="1.0.0" />

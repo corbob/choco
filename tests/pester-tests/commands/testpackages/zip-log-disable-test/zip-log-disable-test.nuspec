@@ -5,8 +5,8 @@
     <id>zip-log-disable-test</id>
     <version>1.0.0</version>
     <title>zip-log-disable-test (Install)</title>
-    <authors>__REPLACE_AUTHORS_OF_SOFTWARE_COMMA_SEPARATED__</authors>
-    <tags>zip-log-disable-test SPACE_SEPARATED</tags>
+    <authors>Chocolatey Software</authors>
+    <tags>zip-log-disable-test</tags>
     <description>Package used to test disabling verbose file log for zip extraction</description>
   </metadata>
   <files>

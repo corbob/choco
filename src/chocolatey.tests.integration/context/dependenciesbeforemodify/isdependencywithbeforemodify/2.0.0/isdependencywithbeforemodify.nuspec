@@ -10,6 +10,7 @@
     <description>Package is a dependency for other testing packages. This package specifically has a chocolateyBeforeModify script.</description>
     <summary>Package is a dependency for other testing packages. This package specifically has a chocolateyBeforeModify script.</summary>
     <releaseNotes />
+    <projectUrl>https://chocolatey.org</projectUrl>
     <tags>isdependencywithbeforemodify admin</tags>
   </metadata>
   <files>

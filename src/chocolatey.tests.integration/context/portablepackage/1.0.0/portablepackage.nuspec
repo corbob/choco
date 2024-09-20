@@ -9,6 +9,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Package used for install tests. Installs various files. Does not have any chocolatey package scripts.</description>
     <summary>Package used for install tests. Installs various files. Does not have any chocolatey package scripts.</summary>
+    <projectUrl>https://chocolatey.org</projectUrl>
     <tags>portablepackage admin</tags>
   </metadata>
   <files>

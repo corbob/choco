@@ -6,8 +6,8 @@
     <version>1.0.0</version>
     <title>package.extension (Install)</title>
     <authors>Chocolatey Software</authors>
-    <projectUrl>https://_Software_Location_REMOVE_OR_FILL_OUT_</projectUrl>
-    <tags>package.extension SPACE_SEPARATED</tags>
+    <projectUrl>https://chocolatey.org</projectUrl>
+    <tags>package.extension</tags>
     <summary>Package used for testing extension packages.</summary>
     <description>Package used for testing extension packages.MarkDown_Okay </description>
   </metadata>
