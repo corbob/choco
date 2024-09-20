@@ -5,11 +5,11 @@
     <id>package.template</id>
     <version>1.0.0</version>
     <title>package.template (Install)</title>
-    <authors>__REPLACE_AUTHORS_OF_SOFTWARE_COMMA_SEPARATED__</authors>
+    <authors>Chocolatey Software</authors>
     <projectUrl>https://_Software_Location_REMOVE_OR_FILL_OUT_</projectUrl>
     <tags>package.template SPACE_SEPARATED</tags>
-    <summary>__REPLACE__</summary>
-    <description>__REPLACE__MarkDown_Okay </description>
+    <summary>Package used for testing template packages.</summary>
+    <description>Package used for testing template packages.MarkDown_Okay </description>
   </metadata>
   <files>
     <file src="templates\**" target="templates" />
