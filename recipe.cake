@@ -352,6 +352,9 @@ BuildParameters.SetParameters(context: Context,
 
 ToolSettings.SetToolSettings(context: Context,
                             buildMSBuildToolVersion: MSBuildToolVersion.NET40);
+ToolSettings.SetToolPreprocessorDirectives(
+                            gitVersionTool: "#tool dotnet:?package=GitVersion.Tool&version=6.0.5",
+                            gitVersionGlobalTool: "#tool dotnet:?package=GitVersion.CommandLine&version=6.0.5");
 
 BuildParameters.PrintParameters(Context);
 
