@@ -1,6 +1,12 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# Setup a global variable to be consistent about xcopy arguments.
+$xcopyArgs = '/s /q /exclude:c:\\chocoroot\\.xcopyignore /i /y /h'
+
+$memory = ENV['VM_MEMORY'] ? ENV['VM_MEMORY'].to_i : 4096
+$cpus = ENV['VM_CPU'] ? ENV['VM_CPU'].to_i : 2
+
 Vagrant.configure("2") do |config|
   config.vm.box = "chocolatey/test-environment"
   # Set Hostname to prevent error messages. https://github.com/hashicorp/vagrant/issues/12644
@@ -20,27 +26,32 @@ Vagrant.configure("2") do |config|
   config.winrm.retry_limit = 30
   config.winrm.retry_delay = 10
 
-  config.vm.network :forwarded_port, guest: 5985, host: 14985, id: 'winrm', auto_correct: true
-  config.vm.network :forwarded_port, guest: 3389, host: 14389, id: 'rdp', auto_correct: true
-
   config.vm.provider "virtualbox" do |vb|
     vb.gui = ENV['VM_GUI'] ? ENV['VM_GUI'].to_s.downcase == 'true' : true
-    vb.memory = ENV['VM_MEMORY'] ? ENV['VM_MEMORY'].to_i : 4096
-    vb.cpus = ENV['VM_CPU'] ? ENV['VM_CPU'].to_i : 2
+    vb.memory = $memory
+    vb.cpus = $cpus
     vb.linked_clone = true
     vb.customize ['modifyvm', :id, '--vram', '128']
   end
   config.vm.provider "hyperv" do |h|
-    h.memory = ENV['VM_MEMORY'] ? ENV['VM_MEMORY'].to_i : 4096
-    h.maxmemory = nil
-    h.cpus = ENV['VM_CPU'] ? ENV['VM_CPU'].to_i : 2
+    # Use Dynamic memory.
+    h.maxmemory = $memory
+    h.cpus = $cpus
     h.linked_clone = true
     h.enable_checkpoints = false
   end
 
-  config.vm.synced_folder '../', '/chocoRoot'
 
-  config.vm.provision "shell", name: "prep", inline: <<-SHELL
+  # Disable the default vagrant share as we don't need it.
+  config.vm.synced_folder '.', '/vagrant', disabled: true
+  # Allow passing in the username/password through environment variables.
+  if ENV['VM_SMB_USERNAME'].nil? || ENV['VM_SMB_PASSWORD'].nil?
+    config.vm.synced_folder '../', '/chocoRoot'
+  else
+    config.vm.synced_folder '../', '/chocoRoot', type: "smb", smb_username: ENV['VM_SMB_USERNAME'], smb_password: ENV['VM_SMB_PASSWORD']
+  end
+
+  config.vm.provision "shell", name: "prep", inline: <<-PREP
     cscript c:/windows/system32/slmgr.vbs /rearm | Out-Null
     Set-ExecutionPolicy Bypass -Scope Process -Force
     iex (irm https://community.chocolatey.org/install.ps1)
@@ -49,34 +60,40 @@ Vagrant.configure("2") do |config|
     choco install git pester visualstudio2022community visualstudio2022-workload-manageddesktop netfx-4.8-devpack -y --no-progress
     Import-Module $env:ChocolateyInstall/helpers/chocolateyProfile.psm1
     Update-SessionEnvironment
-    Write-Host "($(Get-Date -Format "dddd MM/dd/yyyy HH:mm:ss K")) Done installing software, now copying files"
-    # If you try to build on macOS, then run this, there are attributes on some files that cause the build to fail inside of the vagrant environment.
-    xcopy c:\\chocoroot\\* c:\\code\\choco /s /f /exclude:c:\\chocoroot\\.xcopyignore /i /y /h
-  SHELL
-  config.vm.provision "shell", name: "build", inline: <<-SHELL
-    xcopy c:\\chocoroot\\* c:\\code\\choco /s /f /exclude:c:\\chocoroot\\.xcopyignore /i /y /h
+  PREP
+
+  config.vm.provision "shell", name: "clear-build", inline: <<-CLEARBUILD
+    Write-Host "($(Get-Date -Format "dddd MM/dd/yyyy HH:mm:ss K")) Clearing the Chocolatey source directory"
+    Remove-Item -Path C:/code/choco -Recurse -Force -ErrorAction SilentlyContinue
+    xcopy c:\\chocoroot\\* c:\\code\\choco #{$xcopyArgs}
+  CLEARBUILD
+
+  config.vm.provision "shell", name: "build", inline: <<-BUILD
+    xcopy c:\\chocoroot\\* c:\\code\\choco #{$xcopyArgs}
     Push-Location c:/code/choco
     Write-Host "($(Get-Date -Format "dddd MM/dd/yyyy HH:mm:ss K")) Files have been copied, beginning build process."
-    ./build.bat --verbosity=diagnostic --target=CI --testExecutionType=none --shouldRunalyze=false --shouldRunNuGet=false 2>&1 | Tee-Object CakeOutput
+    $CakeOutput = ./build.bat --verbosity=diagnostic --target=CI --testExecutionType=none --shouldRunalyze=false --shouldRunNuGet=false 2>&1
 
     if ($LastExitCode -ne 0) {
-        Set-Content c:/vagrant/buildOutput.log -Value $CakeOutput
+        Set-Content c:/chocoRoot/tests/buildOutput.log -Value $CakeOutput
         Write-Host "The build has failed. Please see the buildOutput.log file for details"
         exit $LastExitCode
     }
 
     Write-Host "($(Get-Date -Format "dddd MM/dd/yyyy HH:mm:ss K")) Build complete."
-  SHELL
-  config.vm.provision "shell", name: "clear-packages", inline: <<-SHELL
+  BUILD
+
+  config.vm.provision "shell", name: "clear-packages", inline: <<-CLEARPACKAGES
     Write-Host "($(Get-Date -Format "dddd MM/dd/yyyy HH:mm:ss K")) Clearing the packages directory"
     Remove-Item "$env:TEMP/chocolateyTests/packages" -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item "$env:TEMP/chocolateyTests/all-packages" -Recurse -Force -ErrorAction SilentlyContinue
-  SHELL
-  config.vm.provision "shell", name: "test", inline: <<-SHELL
-    xcopy c:\\chocoroot\\* c:\\code\\choco /s /f /exclude:c:\\chocoroot\\.xcopyignore /i /y /h
+  CLEARPACKAGES
+
+  config.vm.provision "shell", name: "test", inline: <<-TEST
+    xcopy c:\\chocoroot\\* c:\\code\\choco #{$xcopyArgs}
     # Purge any tests files that have been removed.
     rm -re -fo c:\\code\\choco\\tests
-    xcopy c:\\chocoroot\\tests\\* c:\\code\\choco\\tests /s /f /exclude:c:\\chocoroot\\.xcopyignore /i /y /h
+    xcopy c:\\chocoroot\\tests\\* c:\\code\\choco\\tests #{$xcopyArgs}
     Write-Host "($(Get-Date -Format "dddd MM/dd/yyyy HH:mm:ss K")) Starting Test Execution"
     Push-Location c:/code/choco
     # $env:TEST_KITCHEN = 1
@@ -84,7 +101,7 @@ Vagrant.configure("2") do |config|
     # The Invoke-Tests file will build the packages if the directory does not exist.
     # This will allow to rerun tests without packaging each time.
     ./Invoke-Tests.ps1 -SkipPackaging
-    Copy-Item $env:ALLUSERSPROFILE/chocolatey/logs/testInvocations.log C:/vagrant
-    Copy-Item ./tests/testResults.xml C:/vagrant
-  SHELL
+    Copy-Item $env:ALLUSERSPROFILE/chocolatey/logs/testInvocations.log c:/chocoRoot/tests
+    Copy-Item ./tests/testResults.xml c:/chocoRoot/tests
+  TEST
 end
