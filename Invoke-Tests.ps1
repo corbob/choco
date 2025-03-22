@@ -82,6 +82,8 @@ if (-not (Test-Path "$TestPath/packages") -or -not $SkipPackaging) {
         # This is not currently throwing as there are two packages that are supposed to fail.
         Write-Error "$($packFailures.Count) packages failed to pack."
     }
+
+    choco pack $PSScriptRoot/nuspec/chocolatey/chocolatey/chocolatey.nuspec --version 0.0.1  --out "$TestPath/packages" --allow-unofficial
 }
 
 if (-not (Test-Path "$TestPath/all-packages") -or -not $SkipPackaging) {
