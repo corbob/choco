@@ -83,6 +83,7 @@ if (-not (Test-Path "$TestPath/packages") -or -not $SkipPackaging) {
         Write-Error "$($packFailures.Count) packages failed to pack."
     }
 
+    # Pack a Chocolatey package so that the `choco info` commands can find it.
     choco pack $PSScriptRoot/nuspec/chocolatey/chocolatey/chocolatey.nuspec --version 0.0.1  --out "$TestPath/packages" --allow-unofficial
 }
 

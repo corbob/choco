@@ -1,4 +1,4 @@
-﻿Describe "choco install" -Tag Chocolatey, InstallCommand {
+Describe "choco install" -Tag Chocolatey, InstallCommand {
     BeforeDiscovery {
         $isLicensed30OrMissingVersion = Test-PackageIsEqualOrHigher 'chocolatey.extension' '3.0.0-beta' -AllowMissingPackage
         $licensedProxyFixed = Test-PackageIsEqualOrHigher 'chocolatey.extension' 2.2.0-beta -AllowMissingPackage
@@ -858,7 +858,9 @@
         It "Installs the expected version of the package" {
             "$env:ChocolateyInstall\lib\$PackageUnderTest\$PackageUnderTest.nuspec" | Should -Exist
             [xml]$XML = Get-Content "$env:ChocolateyInstall\lib\$PackageUnderTest\$PackageUnderTest.nuspec"
-            $XML.package.metadata.version | Should -Be "1.0"
+            # TODO: This package is packed by Chocolatey CLI 1.x in the repository used by Test Kitchen.
+            # This will need to be changed when the packages are unified.
+            $XML.package.metadata.version | Should -Be  $(if ($env:TEST_KITCHEN) {"1.0"} else {"1.0.0"})
         }
 
         It "Outputs a message showing that installation was successful" {
@@ -2319,7 +2321,12 @@ To install a local, or remote file, you may use:
             $nuspec | Set-Content -Path $nuspecPath
             "readme content" | Set-Content -Path "$tempPath/$packageName/readme.md"
 
-            $null = Invoke-Choco install nuget.commandline
+            # If we're not in Test Kitchen, we need to install this from CCR.
+            if ($env:TEST_KITCHEN) {
+                $null = Invoke-Choco install nuget.commandline
+            } else {
+                $null = Invoke-Choco install nuget.commandline --source https://community.chocolatey.org/api/v2/
+            }
             $null = & "$env:ChocolateyInstall/bin/nuget.exe" pack $nuspecPath
 
             Disable-ChocolateySource -Name hermes-setup
