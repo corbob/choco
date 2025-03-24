@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 # Setup a global variable to be consistent about xcopy arguments.
-$xcopyArgs = '/s /q /exclude:c:\\chocoroot\\.xcopyignore /i /y /h'
+$xcopyCommand = 'xcopy c:\\chocoroot\\* c:\\code\\choco /s /q /exclude:c:\\chocoroot\\.xcopyignore /i /y /h'
 
 $memory = ENV['VM_MEMORY'] ? ENV['VM_MEMORY'].to_i : 4096
 $cpus = ENV['VM_CPU'] ? ENV['VM_CPU'].to_i : 2
@@ -65,11 +65,11 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", name: "clear-build", inline: <<-CLEARBUILD
     Write-Host "($(Get-Date -Format "dddd MM/dd/yyyy HH:mm:ss K")) Clearing the Chocolatey source directory"
     Remove-Item -Path C:/code/choco -Recurse -Force -ErrorAction SilentlyContinue
-    xcopy c:\\chocoroot\\* c:\\code\\choco #{$xcopyArgs}
+    #{$xcopyCommand}
   CLEARBUILD
 
   config.vm.provision "shell", name: "build", inline: <<-BUILD
-    xcopy c:\\chocoroot\\* c:\\code\\choco #{$xcopyArgs}
+    #{$xcopyCommand}
     Push-Location c:/code/choco
     Write-Host "($(Get-Date -Format "dddd MM/dd/yyyy HH:mm:ss K")) Files have been copied, beginning build process."
     $CakeOutput = ./build.bat --verbosity=diagnostic --target=CI --testExecutionType=none --shouldRunalyze=false --shouldRunNuGet=false 2>&1
@@ -90,10 +90,9 @@ Vagrant.configure("2") do |config|
   CLEARPACKAGES
 
   config.vm.provision "shell", name: "test", inline: <<-TEST
-    xcopy c:\\chocoroot\\* c:\\code\\choco #{$xcopyArgs}
     # Purge any tests files that have been removed.
     rm -re -fo c:\\code\\choco\\tests
-    xcopy c:\\chocoroot\\tests\\* c:\\code\\choco\\tests #{$xcopyArgs}
+    #{$xcopyCommand}
     Write-Host "($(Get-Date -Format "dddd MM/dd/yyyy HH:mm:ss K")) Starting Test Execution"
     Push-Location c:/code/choco
     # $env:TEST_KITCHEN = 1

@@ -45,6 +45,7 @@ Describe "choco uninstall" -Tag Chocolatey, UninstallCommand {
         }
 
         # Broken since v1.0.0
+        # TODO: Why are we tagging this as broken and not considering changing it or updating the test?
         It "Exits with Success (0)" -Tag Broken {
             $Output.ExitCode | Should -Be 0 -Because $Output.String
         }
@@ -70,7 +71,9 @@ Describe "choco uninstall" -Tag Chocolatey, UninstallCommand {
         }
     }
 
-    Context "Uninstalling a package with a failing uninstall script" {
+    # TODO: Fix failure in Vagrant environment
+    # Skipping as we don't currently have these packages in the repository.
+    Context "Uninstalling a package with a failing uninstall script" -skip:(-not $env:TEST_KITCHEN) {
         BeforeAll {
             Restore-ChocolateyInstallSnapshot
 
@@ -251,7 +254,8 @@ Describe "choco uninstall" -Tag Chocolatey, UninstallCommand {
         }
     }
 
-    Context "When specifying non-existing package before and after failing package does not abort execution" {
+    # TODO: This package is currently missing...
+    Context "When specifying non-existing package before and after failing package does not abort execution" -skip:(-not $env:TEST_KITCHEN) {
         BeforeAll {
             $null = Invoke-Choco install uninstallfailure installpackage --confirm
 

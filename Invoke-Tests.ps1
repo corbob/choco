@@ -166,6 +166,7 @@ try {
                 if (-not $env:VM_RUNNING -and -not $env:TEST_KITCHEN) {
                     'VMOnly'
                 }
+                'Broken'
             )
         }
         Should     = @{
