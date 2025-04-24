@@ -27,7 +27,7 @@
 
             $PackageUnderTest = "installpackage"
 
-            $Output = Invoke-Choco install $PackageUnderTest --noop
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --noop -TestId 30
         }
 
         It "Exits with Success (0)" {
@@ -57,7 +57,7 @@
 
             $PackageUnderTest = "somethingnonexisting"
 
-            $Output = Invoke-Choco install $PackageUnderTest --noop
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --noop -TestId 60
         }
 
         It "Exits with Success (0)" {
@@ -83,7 +83,7 @@
 
             $PackageUnderTest = "installpackage"
 
-            $Output = Invoke-Choco install $PackageUnderTest --debug --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --debug --confirm -TestId 86
         }
 
         It "Exits with Success (0)" {
@@ -155,7 +155,7 @@
 
             $PackageUnderTest = "installpackage"
 
-            $Output = Invoke-Choco install $PackageUnderTest --debug --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --debug --confirm -TestId 158
         }
 
         It "Exits with Success (0)" {
@@ -230,7 +230,7 @@
 
             $PackageUnderTest = "installpackage"
 
-            $Output = Invoke-Choco install $PackageUnderTest --include-configured-sources --debug --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --include-configured-sources --debug --confirm -TestId 233
         }
 
         It "Exits with Success (0)" {
@@ -312,7 +312,7 @@
 </packages>
 "@ | Out-File -FilePath $env:CHOCOLATEY_TEST_PACKAGES_PATH\test.packages.config -Encoding utf8
 
-            $Output = Invoke-Choco install $env:CHOCOLATEY_TEST_PACKAGES_PATH\test.packages.config --confirm
+            $Output = Invoke-ChocoSnapshotTest install $env:CHOCOLATEY_TEST_PACKAGES_PATH\test.packages.config --confirm -TestId 315
         }
 
         AfterAll {
@@ -393,7 +393,7 @@
 </packages>
 "@ | Out-File $env:CHOCOLATEY_TEST_PACKAGES_PATH\alloptions.packages.config -Encoding utf8
 
-                $Output = Invoke-Choco install $env:CHOCOLATEY_TEST_PACKAGES_PATH\alloptions.packages.config --confirm --verbose --debug
+                $Output = Invoke-ChocoSnapshotTest install $env:CHOCOLATEY_TEST_PACKAGES_PATH\alloptions.packages.config --confirm --verbose --debug -TestId 396
 
                 # This is based on two observations: The addition explicitly outputs that it's the Package Configuration.
                 # The configuration output is about 80 lines.
@@ -477,7 +477,7 @@
 
             $null = Invoke-Choco install $PackageUnderTest --version 1.0.0 --confirm
 
-            $Output = Invoke-Choco install $PackageUnderTest --version 1.0.0 --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --version 1.0.0 --confirm -TestId 480
         }
 
         It "Exits with Success (0)" {
@@ -514,7 +514,7 @@
             $null = Invoke-Choco install $PackageUnderTest --version 1.0.0 --confirm
             "FileNotOverwritten" | Add-Content -Path "$env:ChocolateyInstall\lib\$PackageUnderTest\tools\chocolateyInstall.ps1"
 
-            $Output = Invoke-Choco install $PackageUnderTest --version 1.0.0 --force --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --version 1.0.0 --force --confirm -TestId 517
         }
 
         It "Exits with Success (0)" {
@@ -553,7 +553,7 @@
             $null = Invoke-Choco install $PackageUnderTest --version 1.0.0 --confirm
             "FileNotOverwritten" | Add-Content -Path "$env:ChocolateyInstall\lib\$PackageUnderTest\tools\chocolateyInstall.ps1"
 
-            $Output = Invoke-Choco install $PackageUnderTest --version 1.0.0 --force --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --version 1.0.0 --force --confirm -TestId 556
         }
 
         It "Exits with Success (0)" {
@@ -598,7 +598,7 @@
                 "Delete"
             )
 
-            $Output = Invoke-Choco install installpackage --force --confirm
+            $Output = Invoke-ChocoSnapshotTest install installpackage --force --confirm -TestId 601
         }
 
         AfterAll {
@@ -643,7 +643,7 @@
                 "Read, Delete"
             )
 
-            $Output = Invoke-Choco install installpackage --force --confirm
+            $Output = Invoke-ChocoSnapshotTest install installpackage --force --confirm -TestId 646
         }
 
         AfterAll {
@@ -693,7 +693,7 @@
                 "None"
             )
 
-            $Output = Invoke-Choco install installpackage --force --confirm
+            $Output = Invoke-ChocoSnapshotTest install installpackage --force --confirm -TestId 696
         }
 
         AfterAll {
@@ -742,7 +742,7 @@
             $PackageUnderTest = "failingdependency"
             $PackageVersion = '0.9.9'
 
-            $Output = Invoke-Choco install $PackageUnderTest --version $PackageVersion --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --version $PackageVersion --confirm -TestId 745
         }
 
         It "Exits with Failure (15608)" {
@@ -772,7 +772,7 @@
 
             $PackageUnderTest = "installpackage"
 
-            $Output = Invoke-Choco install $PackageUnderTest --version 1.0.1 --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --version 1.0.1 --confirm -TestId 775
         }
 
         It "Exits with Failure (1)" {
@@ -794,7 +794,7 @@
 
             $PackageUnderTest = "nonexisting"
 
-            $Output = Invoke-Choco install $PackageUnderTest --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --confirm -TestId 797
         }
 
         It "Exits with Failure (1)" {
@@ -816,7 +816,7 @@
 
             $PackageUnderTest = "badpackage"
 
-            $Output = Invoke-Choco install $PackageUnderTest --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --confirm -TestId 819
         }
 
         It "Exits with Failure (-1)" {
@@ -844,7 +844,7 @@
 
             $PackageUnderTest = "nonterminatingerror"
 
-            $Output = Invoke-Choco install $PackageUnderTest --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --confirm -TestId 847
         }
 
         It "Exits with Success (0)" {
@@ -874,7 +874,7 @@
 
             $PackageUnderTest = "nonterminatingerror"
 
-            $Output = Invoke-Choco install $PackageUnderTest --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --confirm -TestId 879
         }
 
         It "Exits with Failure (1)" {
@@ -900,7 +900,7 @@
 
             $PackageUnderTest = "hasdependency"
 
-            $Output = Invoke-Choco install $PackageUnderTest --version 1.0.0 --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --version 1.0.0 --confirm -TestId 905
         }
 
         It "Exits with Success (0)" {
@@ -934,7 +934,7 @@
             $null = Invoke-Choco install isdependency --version 1.1.0 --confirm
             $null = Invoke-Choco install $PackageUnderTest --version 1.0.0 --confirm
 
-            $Output = Invoke-Choco install $PackageUnderTest --force --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --force --confirm -TestId 939
         }
 
         It "Exits with Success (0)" {
@@ -973,7 +973,7 @@
             $PackageUnderTest = "hasdependency"
             $null = Invoke-Choco install $PackageUnderTest --version 1.0.0 --confirm
 
-            $Output = Invoke-Choco install $PackageUnderTest --force --forcedependencies --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --force --forcedependencies --confirm -TestId 978
         }
 
         It "Exits with Success (0)" {
@@ -1023,7 +1023,7 @@
             $null = Invoke-Choco install isdependency --version 1.0.0 --confirm
             $null = Invoke-Choco install $PackageUnderTest --version 1.0.0 --confirm
 
-            $Output = Invoke-Choco install $PackageUnderTest --force --ignoredependencies --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --force --ignoredependencies --confirm -TestId 1028
         }
 
         It "Exits with Success (0)" {
@@ -1072,7 +1072,7 @@
             $PackageUnderTest = "hasdependency"
             $null = Invoke-Choco install $PackageUnderTest --version 1.0.0 --confirm
 
-            $Output = Invoke-Choco install $PackageUnderTest --force --ignoredependencies --forcedependencies --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --force --ignoredependencies --forcedependencies --confirm -TestId 1077
         }
 
         It "Exits with Success (0)" {
@@ -1110,7 +1110,7 @@
 
             $PackageUnderTest = "ismissingpackage"
 
-            $Output = Invoke-Choco install $PackageUnderTest --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --confirm -TestId 1115
         }
 
         It "Exits with Failure (1)" {
@@ -1136,7 +1136,7 @@
 
             $PackageUnderTest = "hasdependency"
 
-            $Output = Invoke-Choco install $PackageUnderTest --version 1.0.0 --confirm --ignoredependencies
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --version 1.0.0 --confirm --ignoredependencies -TestId 1141
         }
 
         It "Exits with Success (0)" {
@@ -1170,7 +1170,7 @@
             Invoke-Choco install "isdependency" --version 1.0.0 --confirm
             $PackageUnderTest = "hasdependency"
 
-            $Output = Invoke-Choco install $PackageUnderTest --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --confirm -TestId 1175
         }
 
         It "Exits with Success (0)" {
@@ -1209,7 +1209,7 @@
             $null = Invoke-Choco install "hasdependency" --version 1.0.0 --confirm
             $PackageUnderTest = "hasoutofrangedependency"
 
-            $Output = Invoke-Choco install $PackageUnderTest --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --confirm -TestId 1214
         }
 
         It "Exits with Failure (1)" {
@@ -1232,7 +1232,7 @@
             $null = Invoke-Choco install "hasdependency" --version 1.0.0 --confirm
             $PackageUnderTest = "hasoutofrangedependency"
 
-            $Output = Invoke-Choco install $PackageUnderTest --confirm --ignoredependencies
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --confirm --ignoredependencies -TestId 1237
         }
 
         It "Exits with Success (0)" {
@@ -1261,7 +1261,7 @@
             $null = Invoke-Choco install "hasdependency" --version 1.0.0 --confirm
             $PackageUnderTest = "hasoutofrangedependency"
 
-            $Output = Invoke-Choco install $PackageUnderTest --confirm --force --forcedependencies
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --confirm --force --forcedependencies -TestId 1266
         }
 
         It "Exits with Failure (1)" {
@@ -1300,7 +1300,7 @@
             $null = Invoke-Choco install isdependency --version 2.1.0 --confirm
             $PackageUnderTest = "conflictingdependency"
 
-            $Output = Invoke-Choco install $PackageUnderTest --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --confirm -TestId 1305
         }
 
         It "Exits with Success (0)" {
@@ -1335,7 +1335,7 @@
 
             $PackagePath = "$($snapshotPath.PackagesPath)\$PackageUnderTest.1.0.0.nupkg"
 
-            $Output = Invoke-Choco install $PackagePath --confirm --params '/ParameterOne:FirstOne /ParameterTwo:AnotherOne'
+            $Output = Invoke-ChocoSnapshotTest install $PackagePath --confirm --params '/ParameterOne:FirstOne /ParameterTwo:AnotherOne' -TestId 1340
         }
 
         It "Exits with Failure (1)" {
@@ -1369,7 +1369,7 @@ To install a local, or remote file, you may use:
             $snapshotPath = New-ChocolateyInstallSnapshot
             $PackageUnderTest = 'pureportable'
 
-            $Output = Invoke-Choco install $PackageUnderTest
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest -TestId 1374
         }
 
         It "Exits with Success (0)" {
@@ -1399,7 +1399,7 @@ To install a local, or remote file, you may use:
 
             $PackageUnderTest = "installpackage"
 
-            $Output = Invoke-Choco install $PackageUnderTest --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --confirm -TestId 1404
         }
 
         It "Exits with Failure (1)" {
@@ -1423,7 +1423,7 @@ To install a local, or remote file, you may use:
             $null = Invoke-Choco config set --name=proxy --value="https://invalid.chocolatey.org/"
             $null = Invoke-Choco config set --name=proxyBypassList --value="hermes.chocolatey.org"
 
-            $Output = Invoke-Choco install installpackage --confirm
+            $Output = Invoke-ChocoSnapshotTest install installpackage --confirm -TestId 1428
         }
 
         It "Exits with Success (0)" {
@@ -1442,7 +1442,7 @@ To install a local, or remote file, you may use:
             Restore-ChocolateyInstallSnapshot
             $null = Invoke-Choco config set --name=proxy --value="https://invalid.chocolatey.org/"
 
-            $Output = Invoke-Choco install installpackage --confirm "--proxy-bypass-list=hermes.chocolatey.org"
+            $Output = Invoke-ChocoSnapshotTest install installpackage --confirm "--proxy-bypass-list=hermes.chocolatey.org" -TestId 1447
         }
 
         It "Exits with Success (0)" {
@@ -1465,7 +1465,7 @@ To install a local, or remote file, you may use:
         BeforeAll {
             Restore-ChocolateyInstallSnapshot
 
-            $Output = Invoke-Choco install get-chocolateyunzip-test --version 0.0.2 --confirm
+            $Output = Invoke-ChocoSnapshotTest install get-chocolateyunzip-test --version 0.0.2 --confirm -TestId 1470
         }
 
         AfterAll {
@@ -1499,7 +1499,7 @@ To install a local, or remote file, you may use:
         BeforeAll {
             Restore-ChocolateyInstallSnapshot
 
-            $Output = Invoke-Choco install get-chocolateyunzip-custom-paths --params "'/Destination:$Path'" --confirm
+            $Output = Invoke-ChocoSnapshotTest install get-chocolateyunzip-custom-paths --params "'/Destination:$Path'" --confirm -TestId 1504
             $packageFile = Join-Path -Path $Path -ChildPath 'get-chocolateyunzip-custom-paths.txt'
         }
 
@@ -1530,7 +1530,7 @@ To install a local, or remote file, you may use:
         BeforeAll {
             Restore-ChocolateyInstallSnapshot
 
-            $Output = Invoke-Choco install get-chocolateyunzip-licensed --confirm
+            $Output = Invoke-ChocoSnapshotTest install get-chocolateyunzip-licensed --confirm -TestId 1535
         }
 
         It "Exits with Failure (-1)" {
@@ -1543,7 +1543,7 @@ To install a local, or remote file, you may use:
             Restore-ChocolateyInstallSnapshot
             Enable-ChocolateySource -Name hermes-setup
 
-            $Output = Invoke-Choco install business-only-license --confirm
+            $Output = Invoke-ChocoSnapshotTest install business-only-license --confirm -TestId 1548
         }
 
         It "Exits with Failure (-1)" {
@@ -1565,7 +1565,7 @@ To install a local, or remote file, you may use:
             New-ChocolateyInstallSnapshot
             Remove-Item "$env:ChocolateyInstall\logs\*" -ErrorAction Ignore
 
-            $Output = Invoke-Choco install hasbeforeinstallblock --confirm
+            $Output = Invoke-ChocoSnapshotTest install hasbeforeinstallblock --confirm -TestId 1570
         }
 
         It "Exits with Success (0)" {
@@ -1618,7 +1618,7 @@ To install a local, or remote file, you may use:
             }
 
             $null = Invoke-Choco install $Package $Command --confirm
-            $Output = Invoke-Choco pin list
+            $Output = Invoke-ChocoSnapshotTest pin list -TestId 1623
         }
 
         It "Output should include pinned package" {
@@ -1635,7 +1635,7 @@ To install a local, or remote file, you may use:
         BeforeAll {
             Restore-ChocolateyInstallSnapshot
 
-            $Output = Invoke-Choco install zip-log-disable-test --verbose --debug -y
+            $Output = Invoke-ChocoSnapshotTest install zip-log-disable-test --verbose --debug -y -TestId 1640
         }
 
         It "Exits with Success (0)" {
@@ -1651,7 +1651,7 @@ To install a local, or remote file, you may use:
         BeforeAll {
             Restore-ChocolateyInstallSnapshot
 
-            $Output = Invoke-Choco install zip-log-disable-test-external --verbose --debug -y
+            $Output = Invoke-ChocoSnapshotTest install zip-log-disable-test-external --verbose --debug -y -TestId 1656
         }
 
         It "Exits with Success (0)" {
@@ -1667,7 +1667,7 @@ To install a local, or remote file, you may use:
         BeforeAll {
             Restore-ChocolateyInstallSnapshot
 
-            $Output = Invoke-Choco install test-chocolateypath -y
+            $Output = Invoke-ChocoSnapshotTest install test-chocolateypath -y -TestId 1672
         }
 
         It "Exits with Success (0)" {
@@ -1719,7 +1719,7 @@ To install a local, or remote file, you may use:
         BeforeAll {
             $paths = Restore-ChocolateyInstallSnapshot
 
-            $Output = Invoke-Choco install install-chocolateyzip --version 3.21.2 --confirm "$_" "$($paths.CachePathLong)" --no-progress
+            $Output = Invoke-ChocoSnapshotTest install install-chocolateyzip --version 3.21.2 --confirm "$_" "$($paths.CachePathLong)" --no-progress -TestId 1724
         }
 
         AfterAll {
@@ -1785,7 +1785,7 @@ To install a local, or remote file, you may use:
         BeforeAll {
             Restore-ChocolateyInstallSnapshot
 
-            $Output = Invoke-Choco install IsDependency --confirm
+            $Output = Invoke-ChocoSnapshotTest install IsDependency --confirm -TestId 1790
         }
 
         It 'Exits with Success (0)' {
@@ -1811,7 +1811,7 @@ To install a local, or remote file, you may use:
         BeforeAll {
             Restore-ChocolateyInstallSnapshot
 
-            $Output = Invoke-Choco install IsDependency --confirm --disable-repository-optimizations
+            $Output = Invoke-ChocoSnapshotTest install IsDependency --confirm --disable-repository-optimizations -TestId 1816
         }
 
         It 'Exits with Success (0)' {
@@ -1837,7 +1837,7 @@ To install a local, or remote file, you may use:
         BeforeAll {
             Restore-ChocolateyInstallSnapshot
 
-            $Output = Invoke-Choco install IsDependency --confirm --disable-repository-optimizations --version 1.0.0
+            $Output = Invoke-ChocoSnapshotTest install IsDependency --confirm --disable-repository-optimizations --version 1.0.0 -TestId 1842
         }
 
         It 'Exits with Success (0)' {
@@ -1863,7 +1863,7 @@ To install a local, or remote file, you may use:
         BeforeAll {
             Restore-ChocolateyInstallSnapshot
 
-            $Output = Invoke-Choco install IsDependency --confirm --disable-repository-optimizations --version 1.0.0
+            $Output = Invoke-ChocoSnapshotTest install IsDependency --confirm --disable-repository-optimizations --version 1.0.0 -TestId 1868
         }
 
         It 'Exits with Success (0)' {
@@ -1891,7 +1891,7 @@ To install a local, or remote file, you may use:
             $InvalidSource = "https://invalid.chocolatey.org/api/v2/"
             $null = Invoke-Choco source add -n "invalid" -s $InvalidSource
 
-            $Output = Invoke-Choco install installpackage --confirm
+            $Output = Invoke-ChocoSnapshotTest install installpackage --confirm -TestId 1896
         }
 
         It 'Exits with Success (0)' {
@@ -1911,7 +1911,7 @@ To install a local, or remote file, you may use:
         BeforeAll {
             Restore-ChocolateyInstallSnapshot
 
-            $Output = Invoke-Choco install InstAlLpAckaGe --confirm
+            $Output = Invoke-ChocoSnapshotTest install InstAlLpAckaGe --confirm -TestId 1916
         }
 
         It 'Exits with Success' {
@@ -1939,7 +1939,7 @@ To install a local, or remote file, you may use:
         BeforeAll {
             Restore-ChocolateyInstallSnapshot
             $PackageUnderTest = 'nonnormalizedversions'
-            $Output = Invoke-Choco install $PackageUnderTest --Version $SearchVersion
+            $Output = Invoke-ChocoSnapshotTest install $PackageUnderTest --Version $SearchVersion -TestId 1944
         }
 
         It "Should exit with success (0)" {
@@ -1965,7 +1965,7 @@ To install a local, or remote file, you may use:
             $paths = New-ChocolateyInstallSnapshot
 
             # Cache directory is set here to prevent assertion failures
-            $Output = Invoke-Choco install get-chocolateywebfile "--cache-location=$($paths.PackagesPath)" --confirm
+            $Output = Invoke-ChocoSnapshotTest install get-chocolateywebfile "--cache-location=$($paths.PackagesPath)" --confirm -TestId 1970
         }
 
         AfterAll {
@@ -2022,7 +2022,7 @@ To install a local, or remote file, you may use:
         BeforeAll {
             Restore-ChocolateyInstallSnapshot
 
-            $Output = Invoke-Choco install test-environment --version 0.9 --confirm
+            $Output = Invoke-ChocoSnapshotTest install test-environment --version 0.9 --confirm -TestId 2027
         }
 
         It 'Exits with Success (0)' {
@@ -2059,7 +2059,7 @@ To install a local, or remote file, you may use:
             # and makes this test simpler. If this zip file requires regular changes, we would want to
             # remove it from the repository and store it elsewhere that we can retrieve it during CI testing.
             Expand-Archive $PSScriptRoot/demo-projects.zip -DestinationPath $PWD
-            $Output = Invoke-Choco install package-a -s 'a,b,c' --confirm
+            $Output = Invoke-ChocoSnapshotTest install package-a -s 'a,b,c' --confirm -TestId 2064
         }
 
         It "Exits with Success (0)" {
@@ -2099,7 +2099,7 @@ To install a local, or remote file, you may use:
             Restore-ChocolateyInstallSnapshot
 
             $Setup = Invoke-Choco install $DependentPackage.Name --version $DependentPackage.Version --confirm
-            $Output = Invoke-Choco install downgradesdependency --confirm $Argument
+            $Output = Invoke-ChocoSnapshotTest install downgradesdependency --confirm $Argument -TestId 2104
             $Packages = Get-ChocolateyInstalledPackages
         }
 
@@ -2156,7 +2156,7 @@ To install a local, or remote file, you may use:
 
             $Setup = Invoke-Choco install $DependentPackage.Name --version $DependentPackage.Version --confirm
             $null = Enable-ChocolateyFeature -Name StopOnFirstPackageFailure
-            $Output = Invoke-Choco install downgradesdependency installpackage --confirm $Argument
+            $Output = Invoke-ChocoSnapshotTest install downgradesdependency installpackage --confirm $Argument -TestId 2161
             $Packages = Get-ChocolateyInstalledPackages
         }
 
@@ -2198,7 +2198,7 @@ To install a local, or remote file, you may use:
             Disable-ChocolateySource -All
             Enable-ChocolateySource -Name 'hermes-all'
 
-            $Output = Invoke-Choco install @PackageName --confirm
+            $Output = Invoke-ChocoSnapshotTest install @PackageName --confirm -TestId 2203
             $Packages = Get-ChocolateyInstalledPackages
         }
 
@@ -2237,7 +2237,7 @@ To install a local, or remote file, you may use:
             Disable-ChocolateySource -All
             Enable-ChocolateySource -Name 'hermes-all'
 
-            $Output = Invoke-Choco install $PackageName --confirm
+            $Output = Invoke-ChocoSnapshotTest install $PackageName --confirm -TestId 2242
             $Packages = Get-ChocolateyInstalledPackages
         }
 
@@ -2324,7 +2324,7 @@ To install a local, or remote file, you may use:
 
             Disable-ChocolateySource -Name hermes-setup
 
-            $Output = Invoke-Choco install $packageName --source .
+            $Output = Invoke-ChocoSnapshotTest install $packageName --source . -TestId 2334
         }
 
         AfterAll {
