@@ -30,3 +30,8 @@ $Output = Invoke-Choco list
 $Output.Lines | Out-File $env:ChocolateyInstall\Logs\LocalPackages.log
 # Removing any existing snapshot logs to enable local testing without needing to clean the snapshot folder
 Remove-Item -Path $env:ChocolateyInstall\snapshot -Force -Recurse -ErrorAction Ignore
+
+# Remove any existing Should:Because defaults
+$global:PSDefaultParameterValues.Remove('Should:Because')
+# Add our own Should:Because default. This scriptblock will expand to the value in $Output.String so we don't need it on every Should call.
+$global:PSDefaultParameterValues.Add('Should:Because', { $Output.String })
