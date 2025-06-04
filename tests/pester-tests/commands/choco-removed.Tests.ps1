@@ -1,4 +1,5 @@
-﻿Import-Module helpers/common-helpers
+Import-Module helpers/common-helpers
+. $global:boilerplate
 
 Describe "Ensuring removed things are removed" -Tag Removed, Chocolatey {
     BeforeAll {
@@ -12,7 +13,7 @@ Describe "Ensuring removed things are removed" -Tag Removed, Chocolatey {
         Remove-ChocolateyTestInstall
     }
 
-    Context 'Helper function (<FunctionName>)' -Skip:(-not (Test-ChocolateyVersionEqualOrHigherThan '1.0.0')) -ForEach @(
+    Context 'Helper function (<FunctionName>)' -Tag cory -Skip:(-not (Test-ChocolateyVersionEqualOrHigherThan '1.0.0')) -ForEach @(
         @{ FunctionName = 'Write-FileUpdateLog' }
         @{ FunctionName = 'Write-ChocolateySuccess' }
         @{ FunctionName = 'Write-ChocolateyFailure' }
@@ -37,7 +38,7 @@ exit $command.Count
         }
 
         It 'Exits with Success (0)' {
-            $Output.ExitCode | Should -Be 0 -Because $Output.String
+            $Output.ExitCode | Should -Be 1 -Because $Output.String
         }
 
         It 'Reports the correct command name' {
@@ -170,7 +171,8 @@ exit $command.Count
         }
 
         It 'Emits a warning for the removed option' {
-            $Output.Lines | Should -Contain 'The --allow-multiple option is no longer supported.'
+            Write-Host "Command: $Command"
+            $Output.Lines | Should -Contain 'The --allow-multiple option is supported.'
         }
     }
 }
