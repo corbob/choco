@@ -1,4 +1,5 @@
-﻿Import-Module helpers/common-helpers
+﻿throw "Purposely break a container"
+Import-Module helpers/common-helpers
 
 Describe "Ensuring Chocolatey is correctly installed" -Tag Environment, Chocolatey {
     BeforeDiscovery {
