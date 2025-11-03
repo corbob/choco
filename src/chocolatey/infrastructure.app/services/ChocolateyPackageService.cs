@@ -1194,7 +1194,7 @@ Would have determined packages that are out of date based on what is
             return packageUpgrades;
         }
 
-        private void BeforeModifyAction(PackageResult packageResult, ChocolateyConfiguration config)
+        protected virtual void BeforeModifyAction(PackageResult packageResult, ChocolateyConfiguration config)
         {
             if (!config.SkipPackageInstallProvider && config.Information.PlatformType == PlatformType.Windows)
             {
